@@ -1,0 +1,96 @@
+{{!-- <section class="h-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-10 col-xl-8">
+                <div class="card" style="border-radius: 10px;">
+
+                    <div class="card shadow-0 border mb-4">
+                        <div class="card-body">
+
+                            <div class="row">
+                            {{#each products}}
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+
+                                    <img src="/product-images/{{this.product._id}}.jpg" class="card-img-top"
+                                        style="height: 200px; width:auto;" alt="...">
+
+                                </div>
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                    <p class="text-muted mb-0">{{this.product.Name}}</p>
+                                </div>
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                    <p class="text-muted mb-0 small">Quantity:{{this.quantity}}</p>
+                                </div>
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                    <p class="text-muted mb-0 small">Price:{{this.product.Price}}</p>
+                                </div>
+                                
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                    <p class="text-muted mb-0 small">{{this.order.totalAmount}}</p>
+                                </div>
+
+                                 <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+
+                            {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #cd9cf2;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))
+    }
+</style> --}}
+
+<div class="container mt-5 mb-5">
+
+    <div class="d-flex justify-content-center row">
+      {{#each products}}
+        <div class="col-md-10">
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" style="width: 8rem;" src="/product-images/{{product._id}}.jpg"></div>
+                <div class="col-md-6 mt-1">
+                    <h5>{{product.Name}}</h5>
+                     <p class="text-muted mb-0 small">Quantity:{{this.quantity}}</p>
+                    <div class="d-flex flex-row">
+                        {{!-- <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span> --}}
+                    </div>
+                    <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light weight</span><span class="dot"></span><span>Best finish<br></span></div>
+                    <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span class="dot"></span><span>For men</span><span class="dot"></span><span>Casual<br></span></div>
+                    <p class="text-justify text-truncate para mb-0">{{product.description}}<br><br></p>
+                     {{!-- <p class="text-justify text-truncate para mb-0">size:<br><br></p> --}}
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h4 class="mr-1">₹{{product.Price}}</h4>
+                    </div>
+                    <h6 class="text-success">Free shipping</h6>
+                    <div class="d-flex flex-column mt-4">
+                       <a href="/"> <button class="btn btn-warning btn-sm"  type="submit">Continue Shopping</button></a>
+                    {{!-- <button class="btn btn-outline-warning btn-sm mt-2" type="button">Continue Shopping</button> --}}
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+  {{/each}}
+    </div>
+</div>

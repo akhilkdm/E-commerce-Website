@@ -1,0 +1,129 @@
+<div class="superNav border-bottom py-2 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
+        <select class="me-3 border-0 bg-light">
+          <option value="en-us">EN-US</option>
+        </select>
+        <span
+          class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><strong>akhilkodavalam@gmail.com</strong></span>
+        <span class="me-3"><i class="fa-solid fa-phone me-1 text-warning"></i> <strong>7025385722</strong></span>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-none d-lg-block d-md-block-d-sm-block d-xs-none text-end">
+        <span class="me-3"><a class="text-muted"
+            href="https://wa.me/7025385722"><i class="fa-brands fa-whatsapp"></i></a></span>
+            
+        <span class="me-3"><a class="text-muted"
+            href="https://instagram.com/the__poseidon15?igshid=YmMyMTA2M2Y="><i class="fa-brands fa-instagram"></i></a></span>
+        <span class="me-3"><i class="fa-solid fa-file  text-muted me-2"></i><a class="text-muted"
+            href="#">Policy</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 text-white shadow-sm">
+
+  <div class="container">
+    <a class="navbar-brand" style="color: rgb(255, 255, 255);" href="/"><i class="fa-solid fa-bolt text-danger"></i> <strong class="text-danger">
+        HOPE</strong><strong>SALE</strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+      <div class="input-group">
+
+        {{!-- <span class="border-warning input-group-text bg-warning text-white"><i
+            class="fa-solid fa-magnifying-glass"></i></span> --}}
+        {{!-- <input type="text" class="form-control border-warning" style="color:#7a7a7a"> --}}
+        {{!-- <button class="btn btn-warning text-white">Search</button> --}}
+      </div>
+    </div>
+    <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+      {{!-- <div class="ms-auto d-none d-lg-block">
+        <div class="input-group">
+          <span class="border-warning input-group-text bg-warning text-white"><i
+              class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+          <button class="btn btn-warning text-white">Search</button>
+        </div>
+      </div> --}}
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase active text-light" aria-current="page"
+            href="/view-category/MEN">MEN</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase text-light " href="/view-category/WOMEN">WOMEN</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase text-light" href="/view-category/KIDS">KIDS</a>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ms-auto ">
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase text-light" href="/cart"><span class="badge badge-warning"
+              id="cart-count">{{cartCount}}</span><i class="fa-solid fa-cart-shopping me-1"></i> Cart</a>
+        </li>
+        {{!-- <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase" href="#"><i class="fa-solid fa-circle-user me-1"></i> Account</a>
+
+        </li> --}}
+        <li class="nav-item dropdown">
+          {{#if user}}
+          <a class="nav-link dropdown-toggle mx-2 text-uppercase text-white" href="#" id="navbarDarkDropdownMenuLink"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-circle-user me-1"></i> {{user.Name}}
+          </a>
+          {{else}}
+          <a class="nav-link dropdown-toggle mx-2 text-uppercase text-light" href="#" id="navbarDarkDropdownMenuLink"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-circle-user me-1"></i> Account
+          </a>
+          {{/if}}
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            {{#if user}}
+            <li><a class="dropdown-item text-light" href="/profile">Profile</a></li>
+            <li><a class="dropdown-item text-white" href="/orders">My Orders</a></li>
+            {{/if}}
+
+            {{#if user}}
+            <li><a class="dropdown-item text-light" href="/logout">Logout</a></li>
+            {{else}}
+            <li><a class="dropdown-item text-light" href="/login">Login</a></li>
+            {{/if}}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+   background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(255,44,44,0.8242647400757178) 100%);
+  }
+
+  a {
+    font-size: 14px;
+    font-weight: 700
+  }
+
+  .superNav {
+    font-size: 13px;
+  }
+
+  .form-control {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  @media screen and (max-width:540px) {
+    .centerOnMobile {
+      text-align: center
+    }
+  }
+</style>

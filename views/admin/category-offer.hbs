@@ -1,0 +1,111 @@
+<div class="container mt-4">
+<section style="padding-bottom: 100px; mt-4">
+    <table class="table" id="DataTable">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <a href="#add" class="btn btn-primary  ml-auto" style="margin-top: 20px;">Add New
+                    Offer</a>
+            </div>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Percentage</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each catOffers}}
+            <tr>
+                <td>{{inc @index}}</td>
+                <td>{{this.Category}}</td>
+
+                <td>{{this.Starting}}</td>
+                <td>{{this.Expiry}}</td>
+                <td>{{this.catOfferPercentage}}</td>
+                <td>
+                    {{!-- <a href="/admin/edit-catOffer/{{this._id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a> --}} 
+                    <a class="btn btn-danger" href="/admin/delete-catOffer/{{this._id}}" name="{{this.Category}}"
+                        onclick="deleteCategoryoff(event)"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+</section>
+</div>
+<hr>
+<section id="add">
+    <div class="half">
+        <div class="bg order-1 order-md-2" style="background-image: url('/adminLogin/images/bg_1.jpg');"></div>
+        <div class="contents order-2 order-md-1">
+            <div class="container">
+                    <div class="col-md-12">
+                <div class="row align-items-center justify-content-center">
+                        <div class="col-md-6">
+                            <div class="form-block" id="cat">
+                                <div class="text-center mb-5">
+                                    <h3>Category <strong>Offer</strong></h3>
+                                    {{#if catErr}}
+                                    <p class="text-center text-danger">{{catErr}}</p>
+                                    {{/if}}
+                                </div>
+                                <form action="/admin/category-offer" id="productPage" method="post">
+                                    {{#if catOfferExist}}
+                                    <div class="alert alert-danger" role="alert">
+                                        A offer for this Category already Exist!!
+                                    </div>
+                                    {{/if}}
+                                    <div class="form-group first">
+                                        <label for="category">  Category </label>
+                                <select name="Category" id="Category" class="custom-select p-2">
+                                    <option value="" selected>Choose a Category</option>
+                                    {{#each category}}
+                                    <option value="{{this.Category}}">{{this.Category}}</option>
+                                    {{/each}}
+                                </select>
+                                        <label class="pt-4">Starting Date</label>
+                                        <input type="Date" class="form-control" required name="Starting" id="str">
+                                        <label class="pt-4">Expiry Date</label>
+                                        <input type="Date" class="form-control" required name="Expiry" id="exp">
+                                        <label class="pt-4">Offer Percentage</label>
+                                            <input type="text" onkeypress="return isNumber(event)" min="1" max="95"
+                                            class="form-control" required name="catOfferPercentage">
+                                    </div>
+                                    <input type="submit" value="Add" id="catsub" class="btn btn-block btn-primary ">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    $(document).ready(function () {
+        let today = new Date()
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#str').attr('min', today)
+        $('#str').change(function () {
+            let date = document.getElementById('str').value
+            $('#exp').attr('min', date)
+        })
+    })
+</script>

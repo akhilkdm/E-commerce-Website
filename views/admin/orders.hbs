@@ -1,0 +1,173 @@
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">All Orders</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Date </th>
+                                        <th> User Name</th>
+                                        <th> Adrdress </th>
+                                        <th>Price </th>
+                                        <th> Product </th>
+                                        <th> Payment Method </th>
+                                        <th>Status</th>
+                                        <th>Track orders</th>
+                                    </tr>
+                                </thead>
+                                {{#each orders}}
+                                <tbody>
+                                    <tr>
+                                        <td class="py-1">{{this.date}}</td>
+                                        <td> {{this.deliveryDetails.name}} </td>
+                                        <td> {{this.deliveryDetails.address}}<br>
+                                            {{this.deliveryDetails.pincode}}
+
+                                        </td>
+                                        <td>{{this.totalAmount}}</td>
+                                        <td> <a href="/admin/product-details/{{this._id}}"
+                                                class="btn btn-primary">Product Details</a></td>
+                                        <td> {{this.paymentMethod }}</td>
+                                        <td>{{this.status}}</td>
+                                        <td> <select name="order-status" onchange="location = this.value;">
+                                            <option selected>Order Status</option>
+                                                <option value="/admin/cancel-order/{{this._id}}">Cancel</option>
+                                                <option value="/admin/ship-order/{{this._id}}">Ship</option>
+                                                <option value="/admin/deliver-order/{{this._id}}">Delivered</option>
+                                            </select></td>
+
+                                    </tr>
+
+                                </tbody>
+                                {{/each}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    body {
+        background-color: #f9f9fa
+    }
+
+    .flex {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto
+    }
+
+    @media (max-width:991.98px) {
+        .padding {
+            padding: 1.5rem
+        }
+    }
+
+    @media (max-width:767.98px) {
+        .padding {
+            padding: 1rem
+        }
+    }
+
+    .padding {
+        padding: 5rem
+    }
+
+    .card {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -ms-box-shadow: none
+    }
+
+    .pl-3,
+    .px-3 {
+        padding-left: 1rem !important
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #d2d2dc;
+        border-radius: 0
+    }
+
+    .card .card-title {
+        color: #000000;
+        margin-bottom: 0.625rem;
+        text-transform: capitalize;
+        font-size: 0.875rem;
+        font-weight: 500
+    }
+
+    .card .card-description {
+        margin-bottom: .875rem;
+        font-weight: 400;
+        color: #76838f
+    }
+
+    p {
+        font-size: 0.875rem;
+        margin-bottom: .5rem;
+        line-height: 1.5rem
+    }
+
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
+
+    .table,
+    .jsgrid .jsgrid-table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent
+    }
+
+    .table thead th,
+    .jsgrid .jsgrid-table thead th {
+        border-top: 0;
+        border-bottom-width: 1px;
+        font-weight: 500;
+        font-size: .875rem;
+        text-transform: uppercase
+    }
+
+    .table td,
+    .jsgrid .jsgrid-table td {
+        font-size: 0.875rem;
+        padding: .875rem 0.9375rem
+    }
+
+    .badge {
+        border-radius: 0;
+        font-size: 12px;
+        line-height: 1;
+        padding: .375rem .5625rem;
+        font-weight: normal
+    }
+
+    .progress {
+        border-radius: 3px;
+        height: 8px;
+        margin-top: 7px
+    }
+</style>

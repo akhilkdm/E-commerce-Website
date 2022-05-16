@@ -1,0 +1,60 @@
+<section class="mt-5">
+<div class="container">
+
+<div class="row">
+  <div class="col-md-8 mb-4">
+    <div class="card mb-4">
+      <div class="card-header py-3">
+        <h5 class="mb-0">Add Address</h5>
+      </div>
+      <div class="card-body">
+        <form method="post" action="/add-address" >
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+             
+           
+          </div>
+
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <input type="text" name="name" id="form7Example1" class="form-control" required />
+                <label class="form-label" for="form7Example1">Name</label>
+            {{!-- <input type="text" name="userId" value="{{user._id}}"> --}}
+          
+          </div>
+
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+           <textarea class="form-control" name="address" id="form7Example7" required rows="4"></textarea>
+            <label class="form-label" for="form7Example7">Address</label>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+           <input type="number" name="pincode" id="pincode" class="form-control"required />
+            <label class="form-label" for="form7Example6">Pincode</label>
+          </div>
+
+          <!-- Number input -->
+          <div class="form-outline mb-4">
+             <input type="number" name="mobile" id="form7Example6" required class="form-control" />
+            <label class="form-label" for="form7Example6">Phone</label>
+          </div>
+
+          <!-- Message input -->
+         
+
+          <!-- Checkbox -->
+          <div class="form-check d-flex justify-content-center mb-2">
+           
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+         Submit
+        </button>
+           
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  </section>

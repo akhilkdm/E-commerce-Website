@@ -1,0 +1,429 @@
+<div class="container mt-5">
+  <form id="checkout-form">
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Biling details</h5>
+          </div>
+          <div class="card-body">
+
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                  <input type="text" name="name" id="form7Example1" class="form-control" required />
+                  <label class="form-label" for="form7Example1">Name</label>
+                </div>
+              </div>
+              {{!-- <div class="col">
+                <div class="form-outline">
+                  <input type="text" id="form7Example2" class="form-control" />
+                  <label class="form-label" for="form7Example2">Last name</label>
+                </div>
+              </div> --}}
+            </div>
+
+            <!-- Text input -->
+            {{!-- <div class="form-outline mb-4">
+              <input type="text" id="form7Example3" class="form-control" />
+              <label class="form-label" for="form7Example3">Company name</label>
+            </div> --}}
+
+            <!-- Text input -->
+            <div class="form-outline mb-4">
+              <textarea class="form-control" name="address" id="form7Example7" required rows="4"></textarea>
+              <label class="form-label" for="form7Example7">Address</label>
+            </div>
+
+            <!-- Email input -->
+            {{!-- <div class="form-outline mb-4">
+              <input type="email" name="email" id="form7Example5" class="form-control" />
+              <label class="form-label" for="form7Example5">Email</label>
+            </div> --}}
+
+            <div class="form-outline mb-4">
+              <input type="number" name="pincode" id="pincode" class="form-control" required />
+              <label class="form-label" for="form7Example6">Pincode</label>
+            </div>
+
+            <!-- Number input -->
+            <div class="form-outline mb-4">
+              <input type="number" name="mobile" id="form7Example6" required class="form-control" />
+              <label class="form-label" for="form7Example6">Phone</label>
+            </div>
+
+
+
+
+
+            <div class="form-outline mb-4">
+              <input type="text" name="userId" value="{{user._id}}" hidden>
+            </div>
+
+            <!-- Message input -->
+            {{!-- <div class="form-outline mb-4">
+              <textarea class="form-control" id="form7Example7" rows="4"></textarea>
+              <label class="form-label" for="form7Example7">Additional information</label>
+            </div> --}}
+
+            <!-- Checkbox -->
+            {{!-- <div class="form-check d-flex justify-content-center mb-2">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form7Example8" checked />
+              <label class="form-check-label" for="form7Example8">
+                Create an account?
+              </label>
+            </div> --}}
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span></span>
+              </li>
+              {{!-- <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>Gratis</span>
+              </li> --}}
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  {{!-- <strong>
+                    <p class="mb-0">(including VAT)</p>
+                  </strong> --}}
+                </div>
+                <span><strong>₹{{total}}</strong></span>
+              </li>
+            </ul>
+
+            <div class="payment mt-3">
+              <strong>Payment Method</strong> <br>
+              <div class="mt-3">
+                <form action="/pay" method="post">
+                  <label for="" class="radio-inLine" mt-3>
+                    <input type="radio" name="payment-method" value="PAYPAL" checked> PayPal
+                </form>
+                </label><br>
+                <label for="" class="radio-inLine" mt-3>
+                  <input type="radio" name="payment-method" value="COD" checked> COD
+
+                </label> <br>
+                <label for="" class="radio-inLine" mt-3>
+                  <input type="radio" name="payment-method" value="ONLINE" checked> Razorpay
+
+                </label>
+
+              </div>
+
+              {{!-- coupon------- --}}
+              <div class="col-md-4    ">
+                <div class="mb-4">
+                  <div class="mt-4">
+                    <b>
+                      <p class="mb-0">Apply Coupon</p>
+                    </b>
+                  </div>
+                  <div class="card-body">
+                    <div class="single-form form-default">
+                      <div class="form-input form">
+                        <input type="text" placeholder="Coupon Code" id="couponInput" name="Coupon" />
+                      </div>
+                      <input type="text" id="couponTotal" name="Total" value="{{total}}" hidden>
+                      <div class="button mt-3">
+                        <a id="couponBtn" onclick="couponApply()" class="btn btn-success">apply</a>
+                      </div>
+                      {{!-- Error handling of coupons --}}
+                      <div class="mt-2">
+                        <div class="alert alert-danger" style="display: none;" id="couponUsed" role="alert">
+                          This Coupon was redeemed
+                        </div>
+                        <div class="alert alert-danger" style="display: none;" id="couponInvalid" role="alert">
+                          This Coupon is invalid
+                        </div>
+                        <div class="alert alert-success" style="display: none;" id="couponSuccess" role="alert">
+                          Coupon Applied Successfully
+                        </div>
+                        <div class="alert alert-warning" style="display: none;" id="couponExpired" role="alert">
+                          Sorry!!! Your Coupon has been Expired
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+ {{!-- -------wallett---- --}}
+    
+     <div class="">
+            <div class="checkout-sidebar">
+              <div class="checkout-sidebar-coupon">
+                <div class="row">
+                  
+                  <div class="col-sm-12">
+                    <div class="">
+                      <div class="">
+                        <div class="floart-end">
+                          <div class="text-center">
+                            <div>
+                              <img style="height: 40px;"
+                                src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw"
+                                alt="wallet">
+                            </div>
+                            <span>Balance = ₹{{userDetails.wallet}} </span>
+                          </div>
+                        </div>
+                        <input type="text" id="Totalpro" name="Totalpro" value="{{total}}" hidden>
+                        <div class="form-input form text-center">
+                          <input type="text" placeholder="₹ Enter the amount" id="wallet" name="walletAmount"
+                            style="width: 50%; height: 36px; padding-right: 1px;" />
+                        </div>
+                        <div class="button text-center p-2">
+                          <a id="couponBtn" onclick="applyWallet()" class="btn"
+                            style="width: 113px; height: 34px;padding: 6px; ">apply</a>
+                        </div>
+                        <div class="alert alert-danger" style="display: none;" id="valueNotCorrect" role="alert">
+                          Enter the Correct Amount
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-center p-3">
+                    
+
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+            </div>
+
+
+
+            <div class="col-md-4    ">
+              <div class="mb-4">
+                <div class=" py-3">
+                  <h5 class="mb-0">Summary</h5>
+                </div>
+                <div>
+                  <div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                        <p>Product Total: </p>
+                        <span style="font-weight: 500;font-size: 24px;">₹{{this.total}}</span>
+                      </li>
+                  </div>
+                  <div class="total-price shipping ">
+                    {{!-- <p class="value" id="discountLabel" style="display: none;">Discount Price:</p> --}}
+                    <p class="price" id="discounttd" style="display: none;">$ <span style="display: none;"
+                        id="discount"></span> </p>
+                  </div>
+                  <div class="total-price">
+                    <p class="value" id="newTotal" style="display: none;">New Total</p>
+                    <p class="price" id="tdTotal" style="display: none;">$ <span id="totalOriginal"
+                        style="display: none;">${{total}}</span> </p>
+                  </div>
+
+
+                </div>
+                <div class="total-payable" id="newTotal">
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                    <h5 class="value mx-3">Total Amount:</h5>
+                    <span id="ttlprc" class="me-3 text-warning "
+                      style="font-weight: 500;font-size: 24px;">₹{{this.total}}</span>
+                  </li>
+                </div>
+
+              </div>
+
+
+
+              <button type="submit" class="btn btn-primary btn-sm btn-block mt-5">
+                Make purchase
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+
+
+
+
+ <script>
+  function applyWallet() {
+    let walletval = document.getElementById('wallet').value
+    let ttlpro = document.getElementById('Totalpro').value
+    $.ajax({
+      url: '/applyWallet',
+      data: {
+        wallet: walletval,
+        Total: ttlpro
+      },
+      method: 'post',
+      success: (response) => {
+        console.log(response, response.total)
+        if (response.walletSuccess) {
+          document.getElementById("discount").innerHTML = response.total;
+          document.getElementById("ttlprc").innerHTML = response.total;
+          $('#discount').show()
+          $('#discountLabel').show()
+          $('#discounttd').show()
+        } else {
+          $('#valueNotCorrect').show()
+        }
+      }
+    })
+  }
+</script>
+
+<script>
+  function couponApply() {
+
+    let couponCode = document.getElementById('couponInput').value
+    let couponTotal = document.getElementById('couponTotal').value
+    console.log("thiss calllll")
+    $.ajax({
+      url: '/couponApply',
+      data: {
+        Coupon: couponCode,
+        Total: couponTotal
+      },
+      method: 'post',
+      success: (response) => {
+        console.log('res', response)
+        if (response.couponSuccess) {
+          let oldTotal = parseInt(document.getElementById('totalOriginal').innerHTML)
+          console.log(oldTotal)
+          document.getElementById('couponInput').readOnly = true
+          let discount = oldTotal - parseInt(response.total)
+          console.log(discount)
+          document.getElementById('discount').innerHTML = discount
+          document.getElementById("ttlprc").innerHTML = response.total
+          $('#discount').show()
+          $('#discountLabel').show()
+          $('#discounttd').show()
+          $('#newTotal').show()
+          $('#tdTotal').show()
+          $('#totalOriginal').show()
+
+
+
+          document.getElementById('totalOriginal').innerHTML = response.total
+          $('#couponSuccess').show()
+          $('#couponUsed').hide()
+          $('#couponInvalid').hide()
+          $('#couponExpired').hide()
+
+        }
+        if (response.couponUsed) {
+          $('#couponUsed').show()  
+          $('#couponSuccess').hide()
+          $('#couponInvalid').hide()
+          $('#couponExpired').hide()
+          $('#discount').hide()
+          $('#discountLabel').hide()
+        }
+        if (response.invalidCoupon) {
+          $('#couponInvalid').show()
+          $('#couponSuccess').hide()
+          $('#couponUsed').hide()
+          $('#couponExpired').hide()
+          $('#discount').hide()
+          $('#discountLabel').hide()
+        }
+        if (response.couponExpired) {
+          $('#couponExpired').show()
+          $('#couponSuccess').hide()
+          $('#couponInvalid').hide()
+          $('#couponUsed').hide()
+          $('#discount').hide()
+          $('#discountLabel').hide()
+        }
+      }
+    })
+  }
+</script>
+
+<script>
+  $("#checkout-form").submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: '/addNewAddress',
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
+        alert(response)
+        if (response.codSuccess) {
+          location.href = '/order-success'
+        } else if(response.paypal){
+          location.href=response.url;
+        }else{
+          razorpayPayment(response)
+        }
+      }
+    })
+  })
+
+  function razorpayPayment(order) {
+    var options = {
+      "key": "rzp_test_iFauwdezgenPwJ", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "HopeSale",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+
+
+        verifyPayment(response, order)
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
+  function verifyPayment(payment, order) {
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-success'
+        } else {
+          alert("payment failed")
+        }
+      }
+    })
+  }
+
+
+</script>

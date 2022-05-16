@@ -1,0 +1,63 @@
+<section>
+    <div class="container">
+        <div style="width: 500px">
+        <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="myInput" onkeyup="myFunction()">
+      </form>
+      </div>
+        <div class="row mt-5">
+            <table class="table" id="myTable">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <th scope="row">{{inc @index}}</th>
+                        <td>{{this.Name}}</td>
+                        <td>{{this.Email}}</td>
+                        <td>{{this.number}}</td>
+                        <td>
+                         {{#if blocked}}
+                            <a onclick="return confirm('Do you want to unblock User: {{this.Name}}')"
+                             href="/admin/unblock-user/{{this._id}}" class="btn btn-success">Unblock</a>
+                            {{else}}
+                            <a onclick="return confirm('Do you want to block User: {{this.Name}}')"
+                                href="/admin/block-user/{{this._id}}" class="btn btn-danger">block</a>
+                                {{/if}}
+                        </td>
+                        {{/each}}
+                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+    function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

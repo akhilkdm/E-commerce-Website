@@ -1,0 +1,85 @@
+
+
+
+
+
+
+<div class="container mt-3 mt-md-5">
+  <h2 class="text-charcoal hidden-sm-down">Your Orders</h2>
+  <h5 class="text-charcoal hidden-md-up">Your Orders</h5>
+  <div class="row">
+    {{#each orders}}
+    <div class="col-12">
+      <div class="list-group mb-5">
+        <div class="list-group-item p-3 bg-snow" style="position: relative;">
+          <div class="row w-100 no-gutters">
+            <div class="col-6 col-md">
+              <h6 class="text-charcoal mb-0 w-100">Order Number</h6>
+              <a href="" class="text-pebble mb-0 w-100 mb-2 mb-md-0">#A915AFLE4FO</a>
+            </div>
+            <div class="col-6 col-md">
+              <h6 class="text-charcoal mb-0 w-100">Date</h6>
+              <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{this.date}}</p>
+            </div>
+            <div class="col-6 col-md">
+              <h6 class="text-charcoal mb-0 w-100">Total</h6>
+              <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{this.totalAmount}} <br> ({{this.paymentMethod}})</p>
+            </div>
+            <div class="col-6 col-md">
+              <h6 class="text-charcoal mb-0 w-100">Shipped To</h6>
+              <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{this.deliveryDetails.name}} <br>
+                {{this.deliveryDetails.address}}<br>{{this.deliveryDetails.pincode}}</p>
+            </div>
+            <div class="col-12 col-md-3">
+              <a href="/view-order-products/{{this._id}}" class="btn btn-primary w-100">View Products</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="list-group-item p-3 bg-white">
+          <div class="row no-gutters">
+            <div class="col-12 col-md-9 pr-0 pr-md-3">
+              <div class="alert p-2 alert-success w-100 mb-0">
+                <p class="text-green hidden-sm-down mb-0">Order Status</p>
+                <h6 class="text-green mb-0"><b>{{this.status}}</b></h6>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              {{#if Delivered}}
+           
+              <a href="/return-order/{{this._id}}" class="btn btn-secondary w-100 mb-2">Return Shipment</a>
+
+              
+              {{else}}
+              <a href="/cancel-order/{{this._id}}" class="btn btn-secondary w-100 mb-2">Cancel Shipment</a>
+
+              {{/if}}
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+</div>
+
+
+
+
+
+
+<style>
+  .gradient-custom {
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #b82e1f 74%);
+
+  }
+  body {
+    background-color: #f1dfd1;
+    background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%);
+
+  }
+</style>

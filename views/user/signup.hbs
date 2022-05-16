@@ -1,0 +1,222 @@
+{{!-- <div class=" row">
+  <div class="col-md-6 m-auto">
+    <div class="container mt-5 pl-5">
+      <h2 class="text-center">Create new account</h2>
+      <form action="/signup" method="POST">
+        <div class="form-group mt-2">
+          <label>Name</label>
+          <input required type="text" class="form-control" name="Name" placeholder="Enter Name">
+        </div>
+        <div class="form-group mt-2">
+          <label>Email address</label>
+          <input required type="email" class="form-control" name="Email" placeholder="Enter email">
+        </div>
+        <div class="form-group mt-2">
+          <label>Password</label>
+          <input required type="password" class="form-control" name="Password" placeholder="Password">
+        </div>
+        <a href="/login">Already have an account ?</a>
+        <button type="submit" class="btn btn-primary float-right mt-5">Signup</button>
+      </form>
+    </div>
+  </div>
+</div> --}}
+<section class="vh-100" style="background-color: #ffff">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-white bg-dark" style="border-radius: 25px; ">
+          <div class="card-body p-md-5 ">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form class="mx-1 mx-md-4 text-white" action="/signup" method="POST">
+                  {{#if check}}
+                  <p class="text-danger text-center">{{check}}</p>
+                  {{/if}}
+
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="userName" name="Name" class="form-control" required
+                        onkeyup="validateName()" />
+                      <label class="form-label " for="form3Example1c">Your Name</label>
+
+                    <input type="text" name="referedBy" value="{{refer}}" hidden>
+                    </div>
+
+                  </div>
+                  <p id="Name-error"></p>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="email" name="Email" class="form-control" required
+                        onkeyup="validateEmail()" />
+                      <label class="form-label" for="form3Example3c">Your Email</label>
+
+                    </div>
+
+                  </div>
+                  <p id="Email-error"></p>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                   
+                    <i class="fa-solid fa-phone fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="tel" maxlength="10" id="phoneNumber" name="number" class="form-control" required
+                        onkeyup="validatePhoneNUmber()" />
+                      <label class="form-label" for="form3Example3c">phone number</label>
+
+                    </div>
+
+                  </div>
+                  <p id="Phone-error"></p>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="password" name="Password" class="form-control" required
+                        onkeyup="validatePassword()" />
+                      <label class="form-label" for="form3Example4c">Password</label>
+
+                    </div>
+
+                  </div>
+                  <p id="Password-error"></p>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="confirmPassword" class="form-control" required
+                        onkeyup="rePassword()" />
+                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+
+                    </div>
+
+                  </div>
+                  <p id="rePassword-error"></p>
+                  {{!-- <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div> --}}
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg" onclick="return validateForm()">Register</button>
+                  </div>
+                    <p id="Submit-error"></p>
+                </form>
+
+
+              </div>
+              {{!-- <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+              </div> --}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  var nameError = document.getElementById('Name-error');
+  var emailError = document.getElementById('Email-error');
+  var PasswordError = document.getElementById('Password-error');
+  var phoneError = document.getElementById('Phone-error')
+  var submitError = document.getElementById('Submit-error');
+  var confirmPassword = document.getElementById('rePassword-error')
+
+
+
+  function validateName() {
+    var name = document.getElementById('userName').value;
+
+    if (name.length == 0) {
+      nameError.innerHTML = 'Name is required';
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+      nameError.innerHTML = 'Write full name';
+      return false;
+    }
+    nameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+  function validateEmail() {
+    var email = document.getElementById('email').value;
+
+    if (email.length == 0) {
+      emailError.innerHTML = 'Email is required'
+      return false;
+    }
+    if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+      emailError.innerHTML = 'Email invalid'
+      return false;
+    }
+    emailError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validatePassword() {
+    var message = document.getElementById('password').value;
+    var required = 5;
+    var left = required - message.length;
+
+    if (left > 0) {
+      PasswordError.innerHTML = left + 'more character required';
+      return false;
+    }
+
+    PasswordError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function rePassword() {
+    var password = document.getElementById('password').value;
+    var password1 = document.getElementById('confirmPassword').value;
+    if (password != password1) {
+      confirmPassword.innerHTML = 'password is not match';
+      return false;
+    }
+    confirmPassword.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+
+  }
+  function validatePhoneNUmber() {
+    var message = document.getElementById('phoneNumber').value;
+    var required = 10;
+    var left = required - message.length;
+
+    if (left > 0) {
+      phoneError.innerHTML = left + 'more character required';
+      return false;
+    }
+
+    phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+
+  function validateForm() {
+    if (!validateName() || !validateEmail() || !validatePassword() || !validatePhoneNUmber() || !rePassword()) {
+
+      // submitError.style.display='block';
+      submitError.innerHTML = 'Please fix error to submit';
+      setTimeout(function () { submitError.style.display = 'none'; }, 2000);
+      return false;
+    }
+  }
+
+</script>

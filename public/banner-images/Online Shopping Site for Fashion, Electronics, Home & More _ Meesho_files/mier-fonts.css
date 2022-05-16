@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Mier Bold';
+    src: url('../fonts/Mier_B02-Bold.otf');
+    src: url('../fonts/Mier_B02-Bold.woff2') format('woff2'),
+    url('../fonts/Mier_B02-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Mier Book';
+    src: url('../fonts/Mier_B02-Book.otf');
+    src: url('../fonts/Mier_B02-Book.woff2') format('woff2'),
+    url('../fonts/Mier_B02-Book.woff2') format('woff');
+}
+
+@font-face {
+    font-family: 'Mier Demi';
+    src: url('../fonts/Mier_B02-Demi.otf');
+    src: url('../fonts/Mier_B02-Demi.woff2') format('woff2'),
+    url('../fonts/Mier_B02-Demi.woff') format('woff');
+}
+
+

@@ -1,0 +1,465 @@
+<div id="carouselExampleTouch" class="carousel slide " data-mdb-touch="false">
+  <div class="carousel-indicators">
+    <button type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://sslimages.shoppersstop.com/sys-master/root/he7/hec/27460911857694/web_men_voi-jeans_main-carousel_20220420.jpg" class="d-block w-100" alt="Wild Landscape" />
+      <div class="carousel-caption d-none d-md-block">
+        {{!-- <h5>First slide label</h5>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> --}}
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://sslimages.shoppersstop.com/sys-master/root/hbb/heb/27330045018142/web_wom_juniper_main-carousel_20220329.jpg" class="d-block w-100" alt="Camera" />
+      <div class="carousel-caption d-none d-md-block">
+        {{!-- <h5>Second slide label</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> --}}
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://sslimages.shoppersstop.com/sys-master/root/h1b/hba/27269476810782/Carousal-Kids-Only-Web-kidspage21032022.jpg" class="d-block w-100"
+          alt="Exotic Fruits" />
+      <div class="carousel-caption d-none d-md-block">
+        {{!-- <h5>Third slide label</h5>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> --}}
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<section class="page-section" id="team">
+  <div class="container-fluid">
+  <div class="twelve mt-5">
+  <h1>Categories</h1>
+</div>
+    </div>
+    <div class="row mt-3">
+      {{#each category}}
+      <div class="col-md-4 mt-5">
+        <div class="team-member text-center">
+          <a href="/view-category/{{this.Category}}">
+          <img class="mx-auto rounded-circle" src="/category-images/{{this._id}}.jpg" height="200px;" alt="..." /></a>
+          <h4 class="mt-2" >{{this.Category}}</h4>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="eight my-5">
+  <h1>Trending Products</h1>
+</div> 
+
+
+
+
+
+
+      <div class="container">
+        <div class="row">
+          {{#each products}}
+          <div class="col-md-3 col-sm-6 my-4">
+            <div class="product-grid">
+              <div class="product-image">
+                <a href="/product-details/{{this._id}}" class="image">
+                  <img class="pic-1" src="/product-images/{{this._id}}.jpg">
+                  <img class="pic-2" src="/product-images2/{{this._id}}.jpg">
+                </a>
+                {{!-- <span class="product-sale-label"></span> --}}
+                {{#if offerPercentage}}
+                <span class="product-discount-label">{{this.offerPercentage}}%</span>
+                {{/if}}
+              </div>
+              <div class="product-content">
+                <ul class="rating">
+                  <li class="fas fa-star"></li>
+                  <li class="fas fa-star"></li>
+                  <li class="fas fa-star"></li>
+                  <li class="fas fa-star"></li>
+                  <li class="fas fa-star disable"></li>
+                </ul>
+                <h3 class="title"><a href="/product-details/{{this._id}}">{{this.Name}}</a></h3>
+                <div class="price">
+                  {{#if offerPercentage}}
+                  <span>₹{{this.originalPrice}}</span>
+                  {{else}}
+                  {{#if catOfferPercentage}}
+                  <span>₹{{this.originalPrice}}</span>
+                  {{/if}}
+                  {{/if}}
+                  {{#if catOfferPercentage}}
+                  ₹{{this.Price}}
+                  {{else}}
+                  ₹{{this.Price}}
+                  {{/if}}
+                </div>
+                <div class="product-button-group">
+                  {{!-- <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a> --}}
+                  <a class="add-to-cart btn" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i>ADD
+                    TO CART</a>
+                  {{!-- <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a> --}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{/each}}
+        </div>
+      </div>
+
+
+
+
+
+
+<style>
+  /* === BASE HEADING === */ 
+
+h1 {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: #080808;
+  -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+h1 span {
+  display: block;
+  font-size: 0.5em;
+  line-height: 1.3;
+}
+h1 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+
+.twelve h1 {
+  font-size:26px; font-weight:700;  letter-spacing:1px; text-transform:uppercase; width:160px; text-align:center; margin:auto; white-space:nowrap; padding-bottom:13px;
+}
+.twelve h1:before {
+    background-color: #c50000;
+    content: '';
+    display: block;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 5px;
+}
+.twelve h1:after {
+    background-color: #c50000;
+    content: '';
+    display: block;
+  position:absolute; right:0; bottom:0;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 0.25em;
+}
+
+.eight h1 {
+  text-align:center;
+ 
+  text-transform:uppercase;
+  font-size:26px; letter-spacing:1px;
+  
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 16px 0;
+  grid-gap: 22px;
+}
+
+.eight h1:after,.eight h1:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #ccc;
+  background-color:#f8f8f8;
+}
+
+
+
+  :root {
+    --main-color1: #eb4d4b;
+    --text-color: #131e2c;
+  }
+
+  .product-grid {
+    background-color: whitesmoke;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+  }
+
+  .product-grid .product-image {
+    position: relative;
+  }
+
+  .product-grid .product-image a.image {
+    display: block;
+  }
+
+  .product-grid .product-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-image .pic-1 {
+    opacity: 1;
+    backface-visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .product-grid:hover .product-image .pic-1 {
+    opacity: 0;
+  }
+
+  .product-image .pic-2 {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .product-grid:hover .product-image .pic-2 {
+    opacity: 1;
+  }
+
+  .product-grid .product-sale-label,
+  .product-grid .product-discount-label {
+    color: #fff;
+    background: #da5555;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 14px;
+    padding: 5px 11px;
+    border-radius: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: all 0.4s ease;
+  }
+
+  .product-grid .product-sale-label {
+    background: #2ba968;
+    text-transform: uppercase;
+    left: 10px;
+    right: auto;
+  }
+
+  .product-grid .product-content {
+    padding: 12px;
+  }
+
+  .product-grid .rating {
+    padding: 0;
+    margin: 0 0 7px;
+    list-style: none;
+  }
+
+  .product-grid .rating li {
+    color: var(--text-color);
+    font-size: 12px;
+    display: inline-block;
+  }
+
+  .product-grid .rating li.disable {
+    color: rgba(0, 0, 0, .20);
+  }
+
+  .product-grid .title {
+    color: var(--text-color);
+    font-size: 20px;
+    text-transform: capitalize;
+    margin: 0 0 7px;
+  }
+
+  .product-grid .title a {
+    color: var(--text-color);
+    transition: all 500ms;
+  }
+
+  .product-grid .title a:hover {
+    color: var(--main-color1);
+  }
+
+  .product-grid .price {
+    color: var(--text-color);
+    font-size: 18px;
+    letter-spacing: 0.005em;
+    margin-bottom: 10px;
+  }
+
+  .product-grid .price span {
+    color: #a7a7a7;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: line-through;
+  }
+
+  .product-grid .product-button-group {
+    position: relative;
+    z-index: 1;
+  }
+
+  .product-grid .add-to-cart {
+    color: var(--text-color);
+    background: #f4f4f4;
+    font-size: 14px;
+    width: calc(100% - 75px);
+    padding: 8px 3px;
+    margin: 0 auto;
+    display: inline-block;
+    transition: all 0.25s ease 0s;
+  }
+
+  .product-grid .add-to-cart i {
+    margin-right: 8px;
+    display: none;
+    visibility: hidden;
+    transition: all 0.25s ease 0s;
+  }
+
+  .product-grid:hover .add-to-cart {
+    color: #fff;
+    background: var(--text-color);
+  }
+
+  .product-grid:hover .add-to-cart i {
+    display: inline-block;
+    visibility: visible;
+  }
+
+  .product-grid .product-like-icon,
+  .product-grid .product-compare-icon {
+    color: var(--text-color);
+    background: #f4f4f4;
+    line-height: 34px;
+    width: 34px;
+    height: 34px;
+    opacity: 0;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    z-index: -1;
+    transition: all 0.25s ease 0s;
+  }
+
+  .product-grid .product-compare-icon {
+    left: auto;
+    right: 50px;
+  }
+
+  .product-grid:hover .product-like-icon {
+    opacity: 1;
+    left: 0;
+  }
+
+  .product-grid:hover .product-compare-icon {
+    opacity: 1;
+    right: 0;
+  }
+
+  @media only screen and (max-width:990px) {
+    .product-grid {
+      margin-bottom: 30px;
+    }
+  }
+
+  License Terms @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+  {{!-- body {
+    background: #F5F1EE;
+    font-family: 'Roboto', sans-serif;
+  } --}}
+
+  .card {
+    width: 250px;
+    border-radius: 10px;
+  }
+
+  .card-img-top {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  span.text-muted {
+    font-size: 12px;
+  }
+
+  small.text-muted {
+    font-size: 8px;
+  }
+
+  h5.mb-0 {
+    font-size: 1rem;
+  }
+
+  small.ghj {
+    font-size: 9px;
+  }
+
+  .mid {
+    background: #ECEDF1;
+  }
+
+  h6.ml-1 {
+    font-size: 13px;
+  }
+
+  small.key {
+    text-decoration: underline;
+    font-size: 9px;
+    cursor: pointer;
+  }
+
+  .btn-danger {
+    color: #FFCBD2;
+  }
+
+  .btn-danger:focus {
+    box-shadow: none;
+  }
+
+  small.justify-content-center {
+    font-size: 9px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width:600px) {
+    .col-sm-4 {
+      margin-bottom: 50px;
+    }
+  }
+</style>
