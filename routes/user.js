@@ -3,18 +3,20 @@ var express = require('express');
 const res = require('express/lib/response');
 const async = require('hbs/lib/async');
 const { Db, ObjectId } = require('mongodb');
-require('dotenv').config()
+
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers');
 const { checkBlock } = require('../helpers/user-helpers');
 const userHelpers = require('../helpers/user-helpers')
-// const SERVICESID = process.env.OTP_SERVICESID
-// const ACCOUNTSID = process.env.OTP_ACCOUNTSID
-// const AUTHTOKEN = process.env.OTP_AUTHTOKEN
 
-const SERVICESID = "VAb9c0a5552d084596ed3d80e2f2387d4d"
-const ACCOUNTSID = "AC64327e6d94d9f687c036cd1fe7d460f8"
-const AUTHTOKEN = "fa2ebf11fb2d0e6b3211be69dd35438d"
+
+SERVICESID="VAda4c0ea9105541bd654606ea6d516253"
+ACCOUNTSID="ACde55967218170995940ca0fb33469a4a"
+AUTHTOKEN="364UE6oSRuRDXJdpoDj4D2nJR8fJP74M42"
+
+
+
+
 const client = require('twilio')(ACCOUNTSID, AUTHTOKEN)
 const paypal = require('paypal-rest-sdk')
 const createReferal = require('referral-code-generator')
@@ -132,13 +134,14 @@ router.post('/signup', (req, res) => {
         }
       } else {
         userSignup = req.body;
-
+        console.log("number",req.body.number);
         client.verify
           .services(SERVICESID)
           .verifications.create({
             to: `+91${req.body.number}`,
             channel: "sms",
           }).then((response) => {
+            console.log("response",response);
             let signupPhone = req.body.number;
             res.render("user/signupOtp", { signupPhone });
           })
@@ -225,6 +228,8 @@ router.post('/otp-login', (req, res) => {
       res.render('user/otp-login', { otperror: "Your Account is blocked" })
     } else {
       if (number) {
+        console.log("no",number);
+        console.log("ssid",SERVICESID);
         client.verify.services(SERVICESID)
           .verifications.create({
             to: `+91${req.body.number}`,

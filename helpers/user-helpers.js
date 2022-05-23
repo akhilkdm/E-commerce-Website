@@ -55,9 +55,10 @@ module.exports = {
         })
     },
     checkPhone: (phone) => {
-        console.log(phone);
+        console.log("poetry",phone);
         return new promise(async (resolve, reject) => {
             let number = await db.get().collection(collection.USER_COLLECTION).findOne({ number: phone })
+            console.log("akhi",number.number);
             resolve(number)
 
 
@@ -66,7 +67,7 @@ module.exports = {
     emailCheck: (email, mob) => {
         return new promise(async (res, rej) => {
             let found = await db.get().collection(collection.USER_COLLECTION).findOne({ $or: [{ Email: email }, { number: mob }] })
-            console.log(found);
+            console.log("found",found);
             res(found)
         })
     },

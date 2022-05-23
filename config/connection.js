@@ -3,7 +3,7 @@ const state={
     db:null
 }
 module.exports.connect=(done)=>{
-    const url='mongodb+srv://akhilkdm:akhil15kdm@cluster0.8iqcv.mongodb.net/shopping?retryWrites=true&w=majority'
+    const url=process.env.ATLAS_ID;
     const dbname='shopping'
 
     mongoCLlient.connect(url,(err,data)=>{
