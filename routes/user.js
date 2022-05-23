@@ -362,7 +362,7 @@ router.get('/addNewAddress', verifyLogin, async (req, res) => {
 })
 
 router.post('/addNewAddress', async (req, res) => {
-  re1.session.orderId=orderId
+  
   let products = await userHelpers.getCartProductList(req.body.userId)
   if (req.session.couponTotal) {
   
@@ -392,7 +392,7 @@ router.post('/addNewAddress', async (req, res) => {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "http://localhost:3000/success",
+          "return_url": "http://localhost:3000/order-success",
           "cancel_url": "http://localhost:3000/cancel"
         },
         "transactions": [{
@@ -563,13 +563,6 @@ router.post('/address-selection', verifyLogin, async (req, res) => {
   })
 })
 
-router.get('/success',verifyLogin,(req,res)=>{
-    userHelpers.clearCart(req.session.user._id).then(()=>{
-      userHelpers.changePaymentStatus(req.session.orderId).then(()=>{
-        res
-      })
-    })
-})
 
 router.get('/order-success', verifyLogin, (req, res) => {
   userHelpers.clearCart(req.session.user._id).then(()=>{
@@ -578,6 +571,10 @@ router.get('/order-success', verifyLogin, (req, res) => {
   res.render('user/order-success', { user: req.session.user })
     })
   })
+})
+
+router.get('/cancel', verifyLogin, (req, res) => {
+  res.render('user/cancel', { user: req.session.user })
 })
 
 router.get('/orders', verifyLogin, async (req, res) => {

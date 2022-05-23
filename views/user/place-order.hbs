@@ -250,9 +250,7 @@
 
 
 
-              <button type="submit" class="btn btn-primary btn-sm btn-block mt-5">
-                Make purchase
-              </button>
+              <button type="button" onclick="placeOrder()" class=" btn btn-primary  site-btn mt-4">PLACE ORDER</button>
             </div>
           </div>
         </div>
@@ -359,13 +357,13 @@
 </script>
 
 <script>
-  $("#checkout-form").submit((e) => {
-    e.preventDefault()
+  function placeOrder() {
     $.ajax({
       url: '/addNewAddress',
       method: 'post',
       data: $('#checkout-form').serialize(),
       success: (response) => {
+        
         alert(response)
         if (response.codSuccess) {
           location.href = '/order-success'
@@ -376,7 +374,7 @@
         }
       }
     })
-  })
+  }
 
   function razorpayPayment(order) {
     var options = {
