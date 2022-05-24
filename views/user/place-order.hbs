@@ -12,9 +12,10 @@
             <div class="row mb-4">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" name="name" id="form7Example1" class="form-control" required />
+                  <input type="text" name="name" id="name" onkeyup="validateName()" class="form-control" required />
                   <label class="form-label" for="form7Example1">Name</label>
                 </div>
+                <p class="text-danger" id="errorName"></p>
               </div>
               {{!-- <div class="col">
                 <div class="form-outline">
@@ -32,7 +33,7 @@
 
             <!-- Text input -->
             <div class="form-outline mb-4">
-              <textarea class="form-control" name="address" id="form7Example7" required rows="4"></textarea>
+              <textarea class="form-control" name="address" id="address" required rows="4"></textarea>
               <label class="form-label" for="form7Example7">Address</label>
             </div>
 
@@ -43,16 +44,19 @@
             </div> --}}
 
             <div class="form-outline mb-4">
-              <input type="number" name="pincode" id="pincode" class="form-control" required />
+              <input type="number" name="pincode" id="pincode" onkeyup="validatePincode()" class="form-control"
+                required />
               <label class="form-label" for="form7Example6">Pincode</label>
             </div>
+            <p class="text-danger" id="errorPincode"></p>
 
             <!-- Number input -->
             <div class="form-outline mb-4">
-              <input type="number" name="mobile" id="form7Example6" required class="form-control" />
+              <input type="number" name="mobile" id="phone" onkeyup="validatePhoneNumber()" required
+                class="form-control" />
               <label class="form-label" for="form7Example6">Phone</label>
             </div>
-
+            <p class="text-danger" id="errorPhone"></p>
 
 
 
@@ -162,50 +166,50 @@
                 </div>
               </div>
 
- {{!-- -------wallett---- --}}
-    
-     <div class="">
-            <div class="checkout-sidebar">
-              <div class="checkout-sidebar-coupon">
-                <div class="row">
-                  
-                  <div class="col-sm-12">
-                    <div class="">
-                      <div class="">
-                        <div class="floart-end">
-                          <div class="text-center">
-                            <div>
-                              <img style="height: 40px;"
-                                src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw"
-                                alt="wallet">
+              {{!-- -------wallett---- --}}
+
+              <div class="">
+                <div class="checkout-sidebar">
+                  <div class="checkout-sidebar-coupon">
+                    <div class="row">
+
+                      <div class="col-sm-12">
+                        <div class="">
+                          <div class="">
+                            <div class="floart-end">
+                              <div class="text-center">
+                                <div>
+                                  <img style="height: 40px;"
+                                    src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw"
+                                    alt="wallet">
+                                </div>
+                                <span>Balance = ₹{{userDetails.wallet}} </span>
+                              </div>
                             </div>
-                            <span>Balance = ₹{{userDetails.wallet}} </span>
+                            <input type="text" id="Totalpro" name="Totalpro" value="{{total}}" hidden>
+                            <div class="form-input form text-center">
+                              <input type="text" placeholder="₹ Enter the amount" id="wallet" name="walletAmount"
+                                style="width: 50%; height: 36px; padding-right: 1px;" />
+                            </div>
+                            <div class="button text-center p-2">
+                              <a id="couponBtn" onclick="applyWallet()" class="btn"
+                                style="width: 113px; height: 34px;padding: 6px; ">apply</a>
+                            </div>
+                            <div class="alert alert-danger" style="display: none;" id="valueNotCorrect" role="alert">
+                              Enter the Correct Amount
+                            </div>
                           </div>
                         </div>
-                        <input type="text" id="Totalpro" name="Totalpro" value="{{total}}" hidden>
-                        <div class="form-input form text-center">
-                          <input type="text" placeholder="₹ Enter the amount" id="wallet" name="walletAmount"
-                            style="width: 50%; height: 36px; padding-right: 1px;" />
-                        </div>
-                        <div class="button text-center p-2">
-                          <a id="couponBtn" onclick="applyWallet()" class="btn"
-                            style="width: 113px; height: 34px;padding: 6px; ">apply</a>
-                        </div>
-                        <div class="alert alert-danger" style="display: none;" id="valueNotCorrect" role="alert">
-                          Enter the Correct Amount
-                        </div>
                       </div>
+                      <div class="text-center p-3">
+
+
+                      </div>
+
                     </div>
                   </div>
-                  <div class="text-center p-3">
-                    
-
-                  </div>
-                 
                 </div>
               </div>
-            </div>
-          </div>
 
 
             </div>
@@ -261,7 +265,7 @@
 
 
 
- <script>
+<script>
   function applyWallet() {
     let walletval = document.getElementById('wallet').value
     let ttlpro = document.getElementById('Totalpro').value
@@ -328,7 +332,7 @@
 
         }
         if (response.couponUsed) {
-          $('#couponUsed').show()  
+          $('#couponUsed').show()
           $('#couponSuccess').hide()
           $('#couponInvalid').hide()
           $('#couponExpired').hide()
@@ -363,13 +367,13 @@
       method: 'post',
       data: $('#checkout-form').serialize(),
       success: (response) => {
-        
+
         alert(response)
         if (response.codSuccess) {
           location.href = '/order-success'
-        } else if(response.paypal){
-          location.href=response.url;
-        }else{
+        } else if (response.paypal) {
+          location.href = response.url;
+        } else {
           razorpayPayment(response)
         }
       }
@@ -424,4 +428,56 @@
   }
 
 
+</script>
+
+
+<script>
+  var nameError = document.getElementById('errorName');
+  var PincodeError = document.getElementById('errorPincode');
+  var phoneError = document.getElementById('errorPhone')
+  var submitError = document.getElementById('submitError');
+  function validateName() {
+    var name = document.getElementById('name').value;
+    if (name.length == 0) {
+      nameError.innerHTML = 'Name is required';
+      return false;
+    }
+    if (!name.match(/^[a-zA-Z ]{2,30}$/)) {
+      nameError.innerHTML = 'Write full name';
+      return false;
+    }
+    nameError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+
+  function validatePincode() {
+    var message = document.getElementById('pincode').value;
+    var required = 6;
+    var left = required - message.length;
+    if (left > 0) {
+      PincodeError.innerHTML = left + 'more character required';
+      return false;
+    }
+    PincodeError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validatePhoneNUmber() {
+    var message = document.getElementById('phone').value;
+    var required = 10;
+    var left = required - message.length;
+    if (left > 0) {
+      phoneError.innerHTML = left + 'more character required';
+      return false;
+    }
+    phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+    return true;
+  }
+  function validateForm() {
+    if (!validateName() || !validatePincode() || !validatePhoneNUmber()) {
+      // submitError.style.display='block';
+      submitError.innerHTML = 'Please fix error to submit';
+      setTimeout(function () { submitError.style.display = 'none'; }, 2000);
+      return false;
+    }
+  }
 </script>
